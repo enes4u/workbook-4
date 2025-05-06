@@ -26,9 +26,11 @@ public class Employee {
     }
     // Overloaded method: Calculates pay based on punch time card
     public double getTotalPay(boolean calculateFromPunch) {
-        if (calculateFromPunch && lastPunchTime != null) {
-            System.out.println("Calculating pay based on punch-in records.");
-            return getRegularHours() * payRate + getOvertimeHours() * (payRate * 1.5);
+        if (calculateFromPunch) {
+            double punchHours = calculatePunchHours();
+            double regular = Math.min(punchHours, 40);
+            double overtime = Math.max(punchHours - 40, 0);
+            return regular * payRate + overtime * payRate * 1.5;
         }
         return getTotalPay(); // Default calculation if not using punch records
     }
@@ -41,16 +43,27 @@ public class Employee {
         return Math.max(hoursWorked - 40, 0); // Any extra hours beyond 40 are overtime
     }
 ///  this does not reflect to total pay because not constructed yet but will work on that tomorrow
-    public void punchTimeCard(double time){
+    public void punchTimeCard(double time) {
         if (lastPunchTime == null) {
-            lastPunchTime = time;
-            System.out.println(name + " punched in at " + time);
+        // If currently not punched in, store punch-in time
+        lastPunchTime = time;
+        System.out.println(name + " punched in at " + time);
         } else {
-            double workedHours = time - lastPunchTime;
-            hoursWorked = 0;
-            hoursWorked += workedHours;
-            System.out.println(name + " punched out at " + time + " (worked " + workedHours + " hours)");
-            lastPunchTime = null; // Reset punch time for next shift
+        // If already punched in, calculate time worked and record punch pair
+        double workedHours = time - lastPunchTime;
+        hoursWorked += workedHours;
+        punchRecords.add(new Double[]{lastPunchTime, time});
+        System.out.println(name + " punched out at " + time + " (worked " + workedHours + " hours)");
+        lastPunchTime = null; // Reset punch-in time for next session
         }
     }
+    // Calculates total hours from punch-in and punch-out records
+    private double calculatePunchHours() {
+        double total = 0;
+        for (Double[] punch : punchRecords) {
+            total += punch[1] - punch[0];
+        }
+        return total;
+    }
+
 }
