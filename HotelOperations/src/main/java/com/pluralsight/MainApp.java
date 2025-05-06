@@ -3,6 +3,8 @@ package com.pluralsight;
 public class MainApp {
 
     public static void main(String[] args) {
+
+
         Room room1 = new Room(124.0, 2, false, false);
         Reservation reservation1 = new Reservation("king", 3, true);
         Employee employee1 = new Employee(101, "Topher Carter", "Undercover Boss", 10.00, 45.0);
@@ -34,6 +36,31 @@ public class MainApp {
         System.out.println("Total pay is "+employee2.getTotalPay());
         System.out.println("--------------------------------------------------------");
         System.out.println("Total Pay using punch time: $" + employee2.getTotalPay(true));
+
+        Employee employee3 = new Employee(101, "Alice", "Front Desk", 20.0, 0.0);
+
+        // Manual punch in/out with hour values
+        employee3.punchTimeCard(9.0);  // Punch in at 9:00 AM
+        employee3.punchTimeCard(17.0); // Punch out at 5:00 PM
+
+        employee3.punchTimeCard(9.0);  // Next day punch in
+        employee3.punchTimeCard(13.0); // Punch out after 4 hours
+
+        System.out.println("Manual Punch Total Pay: $" + employee3.getTotalPay(true));
+
+        // Simulate auto punch using system time (wait 1 sec between)
+        employee3.punchIn();
+        try { Thread.sleep(300000); } catch (InterruptedException e) {}
+        employee3.punchOut();
+
+        System.out.println("Auto + Manual Punch Total Pay: $" + employee3.getTotalPay(true));
+
+        // Regular fallback pay
+        System.out.println("Total Pay using manual hoursWorked: $" + employee3.getTotalPay());
+
+
+
+
 
 
     }
