@@ -50,7 +50,7 @@ public class MainApp {
 
         // Simulate auto punch using system time (wait 1 sec between)
         employee3.punchIn();
-        try { Thread.sleep(300000); } catch (InterruptedException e) {}
+        try { Thread.sleep(1000); } catch (InterruptedException e) {}
         employee3.punchOut();
 
         System.out.println("Auto + Manual Punch Total Pay: $" + employee3.getTotalPay(true));
@@ -59,7 +59,23 @@ public class MainApp {
         System.out.println("Total Pay using manual hoursWorked: $" + employee3.getTotalPay());
 
 
+        // -------------------------------------------
+        // Hotel Booking Tests
+        // -------------------------------------------
+        Hotel hotel = new Hotel("Grand Plaza", 10, 50);
 
+        System.out.println("Hotel: " + hotel.getName());
+        System.out.println("Available Suites: " + hotel.getAvailableSuites());
+        System.out.println("Available Basic Rooms: " + hotel.getAvailableBasicRooms());
+
+        boolean suiteBooked = hotel.bookRoom(3, true); // attempt to book 3 suites
+        boolean roomBooked = hotel.bookRoom(5, false); // attempt to book 5 basic rooms
+
+        System.out.println("Booked 3 Suites: " + suiteBooked);
+        System.out.println("Booked 5 Basic Rooms: " + roomBooked);
+
+        System.out.println("Available Suites after booking: " + hotel.getAvailableSuites());
+        System.out.println("Available Basic Rooms after booking: " + hotel.getAvailableBasicRooms());
 
 
 
