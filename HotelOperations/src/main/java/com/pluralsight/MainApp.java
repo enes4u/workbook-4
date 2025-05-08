@@ -5,7 +5,7 @@ public class MainApp {
     public static void main(String[] args) {
 
 
-        Room room1 = new Room(124.0, 2, false, false);
+        Room room1 = new Room(124.0, 2);
         Reservation reservation1 = new Reservation("king", 3, true);
         Employee employee1 = new Employee(101, "Topher Carter", "Undercover Boss", 10.00, 45.0);
         Employee employee2  = new Employee(102, "TEST 2 ","Accounting", 15, 10.0);

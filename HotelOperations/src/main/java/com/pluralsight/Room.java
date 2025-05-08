@@ -1,16 +1,16 @@
 package com.pluralsight;
 
 public class Room {
-    private int numberOfBeds;
+    private int  numberOfBeds;
     private double price;
     private boolean occupied;
     private boolean dirty;
 
-    public Room(double price, int numberOfBeds, boolean occupied, boolean dirty) {
+    public Room(double price, int numberOfBeds) {
         this.price = price;
         this.numberOfBeds = numberOfBeds;
-        this.occupied = occupied;
-        this.dirty = dirty;
+        this.occupied = false;
+        this.dirty = false;
     }
 
     public int getNumberOfBeds() {
@@ -47,6 +47,7 @@ public class Room {
     public boolean isAvailable() {
         return !occupied && !dirty;
     }
+    //@todo just highlight for reminder how todo works
     public void checkIn(){
         if (isAvailable()){
             occupied = true;

@@ -22,6 +22,7 @@ public class Hotel {
     }
 
     /**
+     *
      * Constructor that initializes a hotel with some rooms already booked
      * @param name Name of the hotel
      * @param numberOfSuites Total King Suites in hotel

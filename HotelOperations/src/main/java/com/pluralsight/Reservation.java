@@ -9,7 +9,7 @@ public class Reservation {
         this.roomType = roomType;
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
-        this.pricePerNight = roomType.equals("king") ? 139.00 : 124.00;// ternary nested inside constructor
+        this.pricePerNight = roomType.equalsIgnoreCase("king") ? 139.00 : 124.00;// ternary nested inside constructor
         if (isWeekend) {
             this.pricePerNight *= 1.10; // Increase price by 10% for weekends
         }
